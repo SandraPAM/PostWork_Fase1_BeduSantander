@@ -10,4 +10,9 @@ public class Lector {
         return scanner.nextByte();
     }
 
+    public String leeCadena(){
+        System.out.println("Cadena: ");
+        return scanner.nextLine();
+    }
+
 }

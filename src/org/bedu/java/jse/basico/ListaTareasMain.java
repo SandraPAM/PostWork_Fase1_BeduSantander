@@ -4,7 +4,7 @@ public class ListaTareasMain {
     public static void main(String[] args){
         Menu menu = new Menu();
         Lector lector = new Lector();
-        ListaTareas lista = new ListaTareas();
+        ListasTareas lista = new ListasTareas();
         byte opcionSelectionada = 0;
 
         do {

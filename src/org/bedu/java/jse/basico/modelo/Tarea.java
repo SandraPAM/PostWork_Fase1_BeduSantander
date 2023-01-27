@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Tarea {
     private String nombre;
-    private LocalDate fechaCracion;
+    private final LocalDate fechaCracion;
     private LocalDate fechaExpiracion;
     private boolean realizada;
     private LocalDate fechaRealizacion;
@@ -43,10 +43,6 @@ public class Tarea {
 
     public LocalDate getFechaCracion(){
         return fechaCracion;
-    }
-
-    public void setFechaCracion(LocalDate date){
-        this.fechaCracion = date;
     }
 
     public LocalDate getFechaExpiracion(){

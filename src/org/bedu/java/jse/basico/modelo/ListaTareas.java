@@ -4,12 +4,12 @@ import java.time.LocalDate;
 
 public class ListaTareas {
     private String nombre;
-    private LocalDate fechaCreacion;
+    private final LocalDate fechaCreacion;
     {
-        setFechaCreacion(LocalDate.now());
+        fechaCreacion = LocalDate.now();
     }
 
-    ListaTareas(String nombre){
+    public ListaTareas(String nombre){
         setNombre(nombre);
     }
 
@@ -26,10 +26,5 @@ public class ListaTareas {
     public LocalDate getFechaCracion(){
         return fechaCreacion;
     }
-
-    public void setFechaCreacion(LocalDate date){
-        this.fechaCreacion = date;
-    }
-
 
 }

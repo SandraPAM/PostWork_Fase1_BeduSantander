@@ -7,11 +7,13 @@ public class Lector {
 
     public byte leeOpcion(){
         System.out.println("Opción: ");
-        return scanner.nextByte();
+        byte opcion = scanner.nextByte();
+        scanner.nextLine();
+        return opcion;
     }
 
-    public String leeCadena(){
-        System.out.println("Cadena: ");
+    public String leeCadena(String intro){
+        System.out.println(intro.toUpperCase()+ ": ");
         return scanner.nextLine();
     }
 

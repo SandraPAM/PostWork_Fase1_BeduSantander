@@ -45,7 +45,7 @@ public class ListasTareas {
 
     public boolean validIndexLista(byte index){
         if (!existsAnyList() || index >= listasTareas.size() || index < 0){
-            System.out.println("No existe índice de lista");
+            System.out.printf("No existe índice #%d de lista%n", index);
             return false;
         }
         return true;
@@ -59,7 +59,7 @@ public class ListasTareas {
 
             ListaTareas listaTareas = listasTareas.get((int)indexLista-1);
             if (listaTareas.numTareas() == 0){
-                System.out.println("Aún no hay tareas agregadas a la lista #" + indexLista);
+                System.out.printf("Aún no hay tareas agregadas a la lista #%d%n" + indexLista);
             }
 
             int indexTarea = 1;

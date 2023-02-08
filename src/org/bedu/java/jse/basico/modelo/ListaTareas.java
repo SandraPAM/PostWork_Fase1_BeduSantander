@@ -36,8 +36,7 @@ public class ListaTareas {
 
     public Tarea eliminaTarea(int index){
         if (index > tareas.size()){
-            System.out.println("La tarea con el índice indicado (" + index
-                    + ") no se encunetra en la lista.");
+            System.out.printf("La tarea con el índice indicado (%d) no se encuentra en la lista.%n", index);
             return null;
         }
 

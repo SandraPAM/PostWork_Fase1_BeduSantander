@@ -6,7 +6,7 @@ public class Lector {
     private Scanner scanner = new Scanner(System.in);
 
     public byte leeOpcion(){
-        System.out.println("Opción: ");
+        System.out.print("Opción: ");
         byte opcion = scanner.nextByte();
         scanner.nextLine();
         return opcion;

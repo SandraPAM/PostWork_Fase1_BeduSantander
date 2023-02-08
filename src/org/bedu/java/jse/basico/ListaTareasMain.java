@@ -1,7 +1,7 @@
 package org.bedu.java.jse.basico;
 
 public class ListaTareasMain {
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception {
         Menu menu = new Menu();
         Lector lector = new Lector();
         ListasTareas lista = new ListasTareas();
@@ -11,7 +11,7 @@ public class ListaTareasMain {
             menu.muestraOpciones();
             opcionSelectionada = lector.leeOpcion();
 
-            System.out.println("\n\nLa opción seleccionada es: " + opcionSelectionada);
+            System.out.printf("%n%nLa opción seleccionada es: %d%n", opcionSelectionada);
 
             switch (opcionSelectionada){
                 case 1:
@@ -30,6 +30,7 @@ public class ListaTareasMain {
                     lista.eliminarListaDeTareas();
                     break;
                 case 6:
+                    lista.guardarTares();
                     System.out.println("Saliendo de la aplicación.");
                     break;
                 default:

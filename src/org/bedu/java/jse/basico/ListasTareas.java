@@ -3,15 +3,22 @@ package org.bedu.java.jse.basico;
 import org.bedu.java.jse.basico.modelo.ListaTareas;
 import org.bedu.java.jse.basico.modelo.Tarea;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListasTareas {¡
+public class ListasTareas {
     private Lector lector = new Lector();
     private List<ListaTareas> listasTareas = new ArrayList<>();
 
     private Menu menu = new Menu();
     private ManejadorTareas manejadorTareas = new ManejadorTareas();
+    private static final String NOMBRE_ARCHIVO = System.getProperty("user.dir") +
+            "/.tareas";
+
+    public ListasTareas() throws Exception {
+        cargaTareas();
+    }
 
 
     public void crearNuevaList(){
@@ -45,7 +52,7 @@ public class ListasTareas {¡
 
     public boolean validIndexLista(byte index){
         if (!existsAnyList() || index >= listasTareas.size() || index < 0){
-            System.out.println("No existe índice de lista");
+            System.out.printf("No existe índice #%d de lista%n", index);
             return false;
         }
         return true;
@@ -54,18 +61,14 @@ public class ListasTareas {¡
     public void verTareasDeLista(){
         System.out.println("Ver tareas de lista.");
 
-        byte lista = lector.leeOpcion();
-        if (validIndexLista((byte) (lista-1))){
+        byte indexLista = lector.leeOpcion();
+        if (validIndexLista((byte) (indexLista-1))){
 
-            ListaTareas listaTareas = listasTareas.get((int)lista-1);
+            ListaTareas listaTareas = listasTareas.get((int)indexLista-1);
             if (listaTareas.numTareas() == 0){
-                System.out.println("Aún no hay tareas agregadas a la lista #" + lista);
-            }
-
-            int indexTarea = 1;
-            for(Tarea tarea: listaTareas.getTareas()){
-                System.out.println(lista + "." + indexTarea + ": " + tarea.getNombre());
-                indexTarea++;
+                System.out.printf("Aún no hay tareas agregadas a la lista #%d%n", indexLista);
+            } else {
+                listaTareas.muestraTareas();
             }
         }
     }
@@ -91,7 +94,7 @@ public class ListasTareas {¡
             case 2:
                 Tarea t1 = manejadorTareas.eliminarTarea(listaActual);
                 if(t1 != null){
-                    System.out.println("Se elimino la tarea " + t1.getNombre());
+                    System.out.printf("Se eliminó la tarea %s%n", t1.getNombre());
                 } else {
                     System.out.println("No se pudo eliminar la tarea");
                 }
@@ -99,8 +102,8 @@ public class ListasTareas {¡
             case 3:
                 Tarea t2 = manejadorTareas.marcarTareaFinalizada(listaActual);
                 if(t2 != null){
-                    System.out.println("La tarea " + t2.getNombre() + " se completó el " +
-                            t2.getFechaRealizacion());
+                    System.out.printf("La tarea %s se completó el %2$te de %2$tB de %2$tY%n",
+                            t2.getNombre(), t2.getFechaRealizacion());
                 } else {
                     System.out.println("La tarea no pudo ser marcada como finalizada");
                 }
@@ -119,9 +122,22 @@ public class ListasTareas {¡
 
         if (validIndexLista((byte)(lista-1))){
             ListaTareas listaEliminada = listasTareas.remove(lista-1);
-            System.out.println("Se elimino satisfactoriamente la lista de tareas #" +
-                    lista + ": " + listaEliminada.getNombre());
+            System.out.printf("Se eliminó satisfactoriamente la lista de tareas #%d: %s%n",
+                    lista, listaEliminada.getNombre());
         }
 
     }
+    public void cargaTareas() throws Exception {
+        if (new File(NOMBRE_ARCHIVO).exists()){
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(NOMBRE_ARCHIVO));
+
+            listasTareas = (List<ListaTareas>) ois.readObject();
+        }
+    }
+
+    public void guardarTares() throws Exception {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(NOMBRE_ARCHIVO));
+        oos.writeObject(listasTareas);
+    }
+
 }

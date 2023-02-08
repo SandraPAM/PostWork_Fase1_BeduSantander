@@ -11,7 +11,7 @@ public class ManejadorTareas {
     public Tarea nuevaTarea(){
         System.out.println("Nueva Tarea");
         System.out.println("Introduce los datos de la nueva tarea: ");
-        String nombreTarea = lector.leeCadena("Nombre: ");
+        String nombreTarea = lector.leeCadena("Nombre");
 
         return new Tarea(nombreTarea);
     }

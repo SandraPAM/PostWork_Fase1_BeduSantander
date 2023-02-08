@@ -1,10 +1,14 @@
 package org.bedu.java.jse.basico.modelo;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaTareas {
+public class ListaTareas implements Serializable {
     private String nombre;
     private final List<Tarea> tareas = new ArrayList<>();
     private final LocalDate fechaCreacion;
@@ -53,9 +57,10 @@ public class ListaTareas {
 
     public void muestraTareas(){
         int index = 1;
+        System.out.println("#:\t\t|TAREA|\t[COMPLETADO]\t|FECHA");
         for(Tarea tarea: getTareas()){
-            System.out.println((index + 1) + ": " + tarea.getNombre() + "[" +
-                    (tarea.getRealizada() ? "*" : " ") + "] "
+            System.out.println((index + 1) + ": |" + tarea.getNombre() + "|\t[" +
+                    (tarea.getRealizada() ? "🀫" : " ") + "]\t|"
                     + (tarea.getRealizada() ? tarea.getFechaRealizacion() : ""));
             index++;
         }

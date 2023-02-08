@@ -8,7 +8,7 @@ public class Menu {
         System.out.println("3. Ver tareas de lista");
         System.out.println("4. Actualizar lista de tareas");
         System.out.println("5. Eliminar lista de tareas");
-        System.out.println("6. Salir");
+        System.out.println("6. Guardar y Salir");
     }
 
     public void muestraOpcionesTarea(){

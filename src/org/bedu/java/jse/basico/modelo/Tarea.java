@@ -1,8 +1,9 @@
 package org.bedu.java.jse.basico.modelo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Tarea {
+public class Tarea implements Serializable {
     private String nombre;
     private final LocalDate fechaCracion;
     private LocalDate fechaExpiracion;

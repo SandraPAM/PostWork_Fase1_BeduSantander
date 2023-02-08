@@ -3,6 +3,7 @@ package org.bedu.java.jse.basico;
 import org.bedu.java.jse.basico.modelo.ListaTareas;
 import org.bedu.java.jse.basico.modelo.Tarea;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,12 @@ public class ListasTareas {
 
     private Menu menu = new Menu();
     private ManejadorTareas manejadorTareas = new ManejadorTareas();
+    private static final String NOMBRE_ARCHIVO = System.getProperty("user.dir") +
+            "/.tareas";
+
+    public ListasTareas() throws Exception {
+        cargaTareas();
+    }
 
 
     public void crearNuevaList(){
@@ -59,13 +66,9 @@ public class ListasTareas {
 
             ListaTareas listaTareas = listasTareas.get((int)indexLista-1);
             if (listaTareas.numTareas() == 0){
-                System.out.printf("Aún no hay tareas agregadas a la lista #%d%n" + indexLista);
-            }
-
-            int indexTarea = 1;
-            for(Tarea tarea: listaTareas.getTareas()){
-                System.out.printf("%d.%d: %s%n", indexLista, indexTarea, tarea.getNombre());
-                indexTarea++;
+                System.out.printf("Aún no hay tareas agregadas a la lista #%d%n", indexLista);
+            } else {
+                listaTareas.muestraTareas();
             }
         }
     }
@@ -124,4 +127,17 @@ public class ListasTareas {
         }
 
     }
+    public void cargaTareas() throws Exception {
+        if (new File(NOMBRE_ARCHIVO).exists()){
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(NOMBRE_ARCHIVO));
+
+            listasTareas = (List<ListaTareas>) ois.readObject();
+        }
+    }
+
+    public void guardarTares() throws Exception {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(NOMBRE_ARCHIVO));
+        oos.writeObject(listasTareas);
+    }
+
 }

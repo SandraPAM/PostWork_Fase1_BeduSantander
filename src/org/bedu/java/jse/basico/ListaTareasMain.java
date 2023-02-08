@@ -11,7 +11,7 @@ public class ListaTareasMain {
             menu.muestraOpciones();
             opcionSelectionada = lector.leeOpcion();
 
-            System.out.println("\n\nLa opción seleccionada es: " + opcionSelectionada);
+            System.out.printf("%n%nLa opción seleccionada es: %d%n", opcionSelectionada);
 
             switch (opcionSelectionada){
                 case 1:

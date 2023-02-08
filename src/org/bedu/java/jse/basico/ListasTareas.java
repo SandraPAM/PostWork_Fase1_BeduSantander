@@ -6,7 +6,7 @@ import org.bedu.java.jse.basico.modelo.Tarea;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListasTareas {¡
+public class ListasTareas {
     private Lector lector = new Lector();
     private List<ListaTareas> listasTareas = new ArrayList<>();
 
@@ -54,17 +54,17 @@ public class ListasTareas {¡
     public void verTareasDeLista(){
         System.out.println("Ver tareas de lista.");
 
-        byte lista = lector.leeOpcion();
-        if (validIndexLista((byte) (lista-1))){
+        byte indexLista = lector.leeOpcion();
+        if (validIndexLista((byte) (indexLista-1))){
 
-            ListaTareas listaTareas = listasTareas.get((int)lista-1);
+            ListaTareas listaTareas = listasTareas.get((int)indexLista-1);
             if (listaTareas.numTareas() == 0){
-                System.out.println("Aún no hay tareas agregadas a la lista #" + lista);
+                System.out.println("Aún no hay tareas agregadas a la lista #" + indexLista);
             }
 
             int indexTarea = 1;
             for(Tarea tarea: listaTareas.getTareas()){
-                System.out.println(lista + "." + indexTarea + ": " + tarea.getNombre());
+                System.out.printf("%d.%d: %s%n", indexLista, indexTarea, tarea.getNombre());
                 indexTarea++;
             }
         }
@@ -91,7 +91,7 @@ public class ListasTareas {¡
             case 2:
                 Tarea t1 = manejadorTareas.eliminarTarea(listaActual);
                 if(t1 != null){
-                    System.out.println("Se elimino la tarea " + t1.getNombre());
+                    System.out.printf("Se eliminó la tarea %s%n", t1.getNombre());
                 } else {
                     System.out.println("No se pudo eliminar la tarea");
                 }
@@ -99,8 +99,8 @@ public class ListasTareas {¡
             case 3:
                 Tarea t2 = manejadorTareas.marcarTareaFinalizada(listaActual);
                 if(t2 != null){
-                    System.out.println("La tarea " + t2.getNombre() + " se completó el " +
-                            t2.getFechaRealizacion());
+                    System.out.printf("La tarea %s se completó el %2$te de %2$tB de %2$tY%n",
+                            t2.getNombre(), t2.getFechaRealizacion());
                 } else {
                     System.out.println("La tarea no pudo ser marcada como finalizada");
                 }
@@ -119,8 +119,8 @@ public class ListasTareas {¡
 
         if (validIndexLista((byte)(lista-1))){
             ListaTareas listaEliminada = listasTareas.remove(lista-1);
-            System.out.println("Se elimino satisfactoriamente la lista de tareas #" +
-                    lista + ": " + listaEliminada.getNombre());
+            System.out.printf("Se eliminó satisfactoriamente la lista de tareas #%d: %s%n",
+                    lista, listaEliminada.getNombre());
         }
 
     }

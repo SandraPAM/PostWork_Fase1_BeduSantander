@@ -6,16 +6,13 @@ import org.bedu.java.jse.basico.modelo.Tarea;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListasTareas {
-    /*
-        System.out.println("1. Crear nueva lista de tareas");
-        System.out.println("2. Ver listas de tareas");
-        System.out.println("3. Ver tareas de lista");
-        System.out.println("4. Actualizar lista de tareas");
-        System.out.println("5. Eliminar lista de tareas");
-     */
+public class ListasTareas {¡
     private Lector lector = new Lector();
     private List<ListaTareas> listasTareas = new ArrayList<>();
+
+    private Menu menu = new Menu();
+    private ManejadorTareas manejadorTareas = new ManejadorTareas();
+
 
     public void crearNuevaList(){
         System.out.println("Crear nueva lista de tareas.");
@@ -76,10 +73,42 @@ public class ListasTareas {
     public void actualizarListaDeTareas(){
         System.out.println("Actualizar lista de tareas.");
 
-        byte lista = lector.leeOpcion();
+        byte indice = lector.leeOpcion();
 
-        if (!validIndexLista((byte)(lista-1))){
+        if (!validIndexLista((byte)(indice-1))){
             return;
+        }
+
+        ListaTareas listaActual = listasTareas.get(indice - 1);
+        menu.muestraOpcionesTarea();
+        byte opcionSeleccionada = lector.leeOpcion();
+
+        switch (opcionSeleccionada){
+            case 1:
+                Tarea nuevaTarea = manejadorTareas.nuevaTarea();
+                listaActual.agregaTarea(nuevaTarea);
+                break;
+            case 2:
+                Tarea t1 = manejadorTareas.eliminarTarea(listaActual);
+                if(t1 != null){
+                    System.out.println("Se elimino la tarea " + t1.getNombre());
+                } else {
+                    System.out.println("No se pudo eliminar la tarea");
+                }
+                break;
+            case 3:
+                Tarea t2 = manejadorTareas.marcarTareaFinalizada(listaActual);
+                if(t2 != null){
+                    System.out.println("La tarea " + t2.getNombre() + " se completó el " +
+                            t2.getFechaRealizacion());
+                } else {
+                    System.out.println("La tarea no pudo ser marcada como finalizada");
+                }
+                break;
+            case 4:
+                break;
+            default:
+                System.out.println("Opción desconocida.");
         }
     }
 

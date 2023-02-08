@@ -55,7 +55,9 @@ public class ListaTareas {
     public void muestraTareas(){
         int index = 1;
         for(Tarea tarea: getTareas()){
-            System.out.println(index + ": " + tarea.getNombre());
+            System.out.println((index + 1) + ": " + tarea.getNombre() + "[" +
+                    (tarea.getRealizada() ? "*" : " ") + "] "
+                    + (tarea.getRealizada() ? tarea.getFechaRealizacion() : ""));
             index++;
         }
     }

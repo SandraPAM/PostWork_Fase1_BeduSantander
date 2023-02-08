@@ -12,7 +12,7 @@ public class Tarea {
         fechaCracion = LocalDate.now();
     }
 
-    Tarea(String nombre){
+    public Tarea(String nombre){
         setNombre(nombre);
     }
 
